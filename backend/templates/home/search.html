@@ -1,0 +1,49 @@
+{% extends 'home/base/base.html' %}
+
+{% block title %} Tìm kiếm kêt quả| Azenly {% endblock %}
+{% block body %}
+<div class="container pt-4 pb-4 " style="margin-bottom: 70px;">
+    {% if post %}
+    <h3> Kết quả : <b>{{ search }}</b></h3>
+    <br>
+<div class="row">
+    
+{% for p in post %}
+
+    <div class="col-lg-3">
+
+<div class="card border-0 mb-4 box-shadow h-xl-300" style=" box-shadow: 1px 2px 5px 6px #ececec; padding: 10px;">
+
+    <div class="card-body px-0 pb-0 d-flex flex-column align-items-start">
+        <h2 class="h4 font-weight-bold">
+        <a class="text-dark" href="{% url 'single_blog' p.id %}"> {{ p.title}} </a>
+        </h2>
+        <p class="card-text">
+            {{p.detail|truncatechars:100}}
+        </p>
+        <div>
+            <small class="d-block">
+            <a class="text-muted" href=" ">{{p.author.author.username}}</a> in {{ p.catagories}}</small>
+            <small class="text-muted">{{ p.created_at | timesince }} ago .  {{p.visit_count}} views</small>
+        </div>
+    </div>
+</div>
+</div>
+{% endfor %}
+</div>
+
+{% else %}
+<div class="col-lg-10 " style="margin:0 auto;">
+ <h3>Kết quả tìm kiếm của bạn - <b>{{ search }}</b> - không có văn bản nào.</h3> 
+
+<h5> Gợi ý: </h5>
+<ul>
+<li>  Đảm bảo rằng bạn viết đúng chính tả.</li>
+<li>  Thử nhập từ khoá khác.</li>
+>
+</ul>
+
+</div>
+{% endif %}
+</div>
+{% endblock %}
